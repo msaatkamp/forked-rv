@@ -1,4 +1,153 @@
+//small tablets and mobile
+$screen-mobile: 320px;
+// Small Tablet portrait
+$screen-tablet: 768px;
+// Small desktops
+$screen-lg-min: 992px;
+// Large table or desktop 
+$screen-desktop: 1200px;
+
+$light-green: #75BC97;
+$dark-green: #15573F;
+$light-orange: #FD9872;
+
+@mixin mobile {
+    @media (max-width: #{$screen-tablet}) {
+        @content;
+    }
+}
+
+@mixin common {
+    @media (min-width: #{$screen-tablet}) {
+        @content;
+    }
+}
+
+@mixin content-base {
+    display: flex;
+    flex-direction: column;
+    padding: 12px 20%;
+    position: relative;
+    z-index: 1;
+}
+
+@mixin plant-img-header {
+    position: absolute;
+    height: 100%;
+    z-index: 1;
+}
+
 body {
     font-family: "Montserrat", sans-serif;
-    background-color: green;
+    background-color: $light-green;
+    margin: 0px;
+}
+
+#app {
+    background-color: red;
+    display: flex;
+    flex-direction: column;
+
+// 768px window width or less
+    @include mobile {
+    }
+// 992px window width and more
+    @include common {
+    }
+}
+
+.header {
+    position: relative;
+    background-color: $light-green;  
+
+    .plant-left {
+        // background-image: url(/images/hero/desktop/left-leaves.png);
+
+        img {
+            @include plant-img-header;
+            left: 0px;
+            top: 0px;
+            width: 60vw;
+        }
+        
+    }
+    .hero {
+        // background-image: url(/images/hero/desktop/plantperson.png);
+        img {
+            position: absolute;
+            left: 800px;
+            top: 36px;
+            z-index: 0;        
+            height: 90%;
+            width: 20vw;
+            left: 56vw;
+        }
+        
+    }
+    .plant-right {
+        img {
+            @include plant-img-header;
+            width: 25vw;
+            right: 0px;
+            top: 0px;
+        // background-size: cover;
+        // background-repeat: no-repeat;
+        // background-position: bottom;
+        }
+        // background-image: url(images/hero/desktop/right-leaves.png);
+        
+    }
+    
+    .content {
+        @include content-base;
+
+        img {
+            width: 170px;
+            margin-top: 32px;
+        }
+
+        span {
+            // position: absolute;
+            // top: 124px;
+            // left: 15%;
+            color: white;
+            font-weight: bold;
+            font-size: 70px;
+    
+            width: 400px;
+            height: 252px;
+    
+            // position: absolute;
+            // left: 288px;
+            // top: 124px;
+            margin-top: 32px;
+            line-height: 85px;
+        }
+    }
+
+    
+    @include mobile {
+        height: 100vh;
+    }
+    @include common {
+        height: 70vh;
+    }
+}
+
+.filter {
+    height: 30vh;
+    background-color: white;
+
+    .content {
+        @include content-base;
+        flex-direction: row;
+
+        .card {
+            padding: 12px;
+            flex-grow: 1;
+
+            display: flex;
+            flex-direction: column;
+        }
+    }
 }
