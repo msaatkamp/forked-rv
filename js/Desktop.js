@@ -9,7 +9,9 @@ const DesktopApp = () => {
 	const html = `<div class="container">
             ${Header()}
             ${Filter()}
-            ${Plants()}
+            <div id="plants">
+                ${Plants()}
+             </div>
         </div>`
 
 	return html

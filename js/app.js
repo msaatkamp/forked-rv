@@ -1,5 +1,6 @@
 import DesktopApp from './Desktop'
 import MobileApp from './Mobile'
+import { LoadPlants } from './components/Plants/Plants'
 
 async function App() {
 	const body = document.createElement('template')
@@ -22,28 +23,28 @@ start()
 // just making it global, fires only on change
 window.onChangeFilter = () => {
 	const filters = []
-	document.querySelectorAll('select').forEach(e => filters.push(e.value))
-	console.log()
+	document.querySelectorAll('select').forEach(e => !!e.value && filters.push(e.value))
+    
+	if(filters && filters.length === 3) {
+		fetch(`https://front-br-challenges.web.app/api/v2/green-thumb/?sun=${filters[0]}&water=${filters[1]}&pets=${filters[2]}`, {
+			'referrerPolicy': 'strict-origin-when-cross-origin',
+			'body': null,
+			'method': 'GET',
+			'mode': 'cors',
+			'credentials': 'omit'
+		}).then(response => {
+			if(response.status === 200) {
+				return response.json()
+			}
 
-	fetch(`https://front-br-challenges.web.app/api/v2/green-thumb/?sun=${filters[0]}&water=${filters[1]}&pets=${filters[2]}`, {
-		'referrerPolicy': 'strict-origin-when-cross-origin',
-		'body': null,
-		'method': 'GET',
-		'mode': 'cors',
-		'credentials': 'omit'
-	}).then(response => {
-		if(response.status === 200) {
-			return response.json()
-		}
+			throw 'Failed.'
+		}).then(filtered => {
+			console.log('Received filter: ' , {filtered})
+			LoadPlants(filtered)
 
-		throw 'Failed.'
-	}).then(filtered => {
-		console.log('Received filter: ' , {filtered})
-		window.plants = filtered
-	}).catch(() => {
-		alert('Failed to filter plants results.')
-		window.plants = []
-	})
+		}).catch(() => {
+			alert('Failed to filter plants results.')
+		})
+	}
+	
 }
-
-window.plants = []

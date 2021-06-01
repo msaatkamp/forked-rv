@@ -27,6 +27,7 @@ const Card = ({imageUrl, imageAlt, question, options }) => {
         <img src=${imageUrl} alt=${imageAlt}>
         <span>${question}</span>
         <select name="sun" id="sun" onChange="onChangeFilter()">
+            <option value=""> Select an option . . </option>
             ${ options.map((e) => `<option value=${e}>${e}</option>`)}
         </select>
         </div>
