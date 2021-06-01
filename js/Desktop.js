@@ -1,6 +1,7 @@
 import Header from './components/Header/Header'
 import Filter from './components/Filter/Filter'
 import Plants from './components/Plants/Plants'
+import PlantsJson from '../mocked.json'
 
 
 
@@ -10,7 +11,7 @@ const DesktopApp = () => {
             ${Header()}
             ${Filter()}
             <div id="plants">
-                ${Plants()}
+                ${Plants(PlantsJson)}
              </div>
         </div>`
 

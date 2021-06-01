@@ -102,8 +102,8 @@ body {
     .content {
         @include content-base;
 
-        img {
-            width: 170px;
+        svg {
+            width: 250px;
             margin-top: 32px;
         }
 
@@ -195,12 +195,11 @@ body {
 }
 
     .plants {
-        height: 30vh;
         min-height: 240px;
         background-color: #F6F6F6;
         .content {
             @include content-base;
-            flex-direction: row;
+            flex-direction: column;
             justify-content: space-around;
 
             .no-results{
@@ -210,8 +209,96 @@ body {
 
             h2 {
                 color: #A9A9A9;
+            }
 
+            .sun-high{
+                border: 1px solid orange;
             }
         }
 
+    }
+
+    .filled {
+        .pick-img {
+            width: 160px;
+            height: 80px;
+        }
+        .title{
+            font-size: calc(16px + 3.6vh);
+            font-weight: bold;
+            font-family: Montserrat;
+            margin-top: 24px;
+            margin-bottom: 24px;
+        }
+        .plants-grid {
+            display: grid;
+            grid-template-columns: repeat(4, auto);
+            grid-row-gap: 24px;
+            grid-column-gap: 24px;
+            justify-items: stretch;
+
+            .plant-card:first-of-type {
+                grid-row: 1 / span 2;
+                grid-column: 1 / span 2;
+            }
+        }
+
+        .plant-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            background-color: white;
+            color: #1E6B4E;
+            font-weight: bold;
+            font-family: Montserrat;
+            padding: 16px 0px;
+
+            .favorite {
+                > P {
+                    padding: 4px 24px;
+                }
+                > span{
+                    background-color: #75BC97;
+                    padding: 4px 24px;
+                    border-top-right-radius: 15px;
+                    border-bottom-right-radius: 15px;
+                }
+            }
+            
+            .plant-name{
+                font-size: calc(10px + 1.2vh);
+                padding: 8px;
+            }
+            .plant-price{
+                font-size: calc(10px + 0.8vh);
+                padding: 8px 0px;
+            }
+            .image-wrapper {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                .plant-image{
+                    height: 17vh;
+                    max-width: 7vw;
+                }
+            }
+            .bottom-wrapper {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                padding: 12px 12px;
+                .icons {
+                    display: flex;
+                    flex-direction: row;
+                    .icon{
+                        height: 2.4vh;
+                        width: 2.4vh;
+                        padding: 4px;
+                    }
+                }
+            }
+            
+        }
+
+        
     }

@@ -1,6 +1,6 @@
 import Sun from '../../../images/illustrations/sun.png'
 import Dog from '../../../images/illustrations/dog.png'
-import WateringCan from '../../../images/illustrations/Wateringcan.png'
+import WateringCan from '../../../images/illustrations/wateringcan.png'
 
 const Filter = () => {
 
@@ -21,14 +21,17 @@ const Filter = () => {
 	return html
 }
 
-const Card = ({imageUrl, imageAlt, question, options }) => {    
+const Card = ({imageUrl, imageAlt, question, options }) => {
+	let cardOptions = ''
+	options.map((e) => cardOptions+=`<option value=${e}>${e}</option>`)
+
 	return `
         <div class="card">
         <img src=${imageUrl} alt=${imageAlt}>
         <span>${question}</span>
         <select name="sun" id="sun" onChange="onChangeFilter()">
             <option value=""> Select an option . . </option>
-            ${ options.map((e) => `<option value=${e}>${e}</option>`)}
+            ${cardOptions}
         </select>
         </div>
     `

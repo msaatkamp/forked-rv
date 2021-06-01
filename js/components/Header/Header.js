@@ -16,7 +16,7 @@ const Header = () => {
                 <img src=${plantRight} alt="Decorative plant bush">
             </div>
             <div class='content'>
-                <img src=${greenThumb} alt="Greenthumb" />
+                <svg><g>${greenThumb}</g></svg>
                 <span>
                     Find your next green friend
                 </span>

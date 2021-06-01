@@ -11,7 +11,7 @@ import waterDailyImg from '../../../images/icons/3-drops.svg'
 
 import noSunImg from '../../../images/icons/no-sun.svg'
 import lowSunImg from '../../../images/icons/low-sun.svg'
-import highSunImg from '../../../images/icons/logo-white.svg'
+import highSunImg from '../../../images/icons/low-sun.svg'
 
 
 
@@ -20,10 +20,13 @@ const Plants = (plants) => {
         
 		return `<div class="plants filled">
                 <div class='content'>
-                    <img src=${PickImg} alt="Pick" class="pickImg">
+                    <div>
+                        <img src=${PickImg} alt="Pick" class="pick-img">
+                    </div>
                     <span class="title">
                         Our picks for you
                     </span>
+                    ${PlantsGrid(plants)}
                 </div>
             </div>`
 	}
@@ -43,31 +46,45 @@ const Plants = (plants) => {
 }
 
 const PlantsGrid = (plants) => {
+	let plantsCards = ''
+	plants.map(e => plantsCards += PlantCard({...e}))
+
 	const html = `
         <div class="plants-grid">
+            ${plantsCards}
         </div>
     `
+
+	return html
 }
 
-const PlantCard = ({id, name, sun, url, water, price, toxicity, staff_favorite}) => {
+const PlantCard = (props) => {
+	const {id, name, sun, url, water, price, toxicity, staff_favorite} = props
+	console.log({props})
 
 	const petImg = toxicity ? toxicImg : petFriendlyImg
-	const petAlt = toxicity ? 'Toxic' : 'Pet Friendly'
 
 	const waterImg = water == 'daily' && waterDailyImg || water == 'regularly' ? waterRegularlyImg : waterRarelyImg
 	const sunImg = sun == 'no' && noSunImg || sun == 'low' ? lowSunImg : highSunImg
 
 	return `
-        <div class="plant-card">
-            <img src=${url} alt=${name}>
-            <div>
-                <span>${name}</span>
-                <span>${price}</span>
+        <div class="plant-card" id="plant-${id}">
+        <div class="favorite">${staff_favorite ? '<span>Staff Favorite</span>' : '<p></p>'}</div>
+            <div class="image-wrapper">
+                <img src=${url} alt=${name} class="plant-image">
             </div>
-            <div class="icons">
-                <img src=${petImg} class="pet icon" alt=${petAlt}>
-                <img src=${waterImg} class="water icon" alt=${'Water ' + water}
-                <img src=${sunImg} class="water icon" alt=${'Should take sun ' + sun}
+            <div class="bottom-wrapper">
+                <div>
+                    <span class="plant-name">${name}</span>
+                </div>
+                <div>
+                    <span class="plant-price">$${price}</span>
+                    <div class="icons">
+                        <svg class="pet icon"><g>${petImg}</g></svg>
+                        <svg class="pet icon"><g>${waterImg}</g></svg>
+                        <svg class="pet icon"><g>${sunImg}</g></svg>
+                    </div>
+                </div>
             </div>
         </div>
     `
@@ -79,8 +96,7 @@ export const LoadPlants = async (plantsList) => {
 		document.getElementById('plants').innerHTML = Plants(plantsList)
 	} else{
 		document.getElementById('plants').innerHTML = Plants()
-	}       
-    
+	}
 }
 
 export default Plants
